@@ -1,11 +1,32 @@
 const router = require('koa-router')()
 const { createParameterError, createAuthorizationError, createForbiddenError, createHttpError } = require('@/utils/error')
+const { generateToken } = require('@/utils/jwt')
 
-
-router.get('/', async (ctx, next) => {
-  await ctx.render('index', {
-    title: 'Hello Koa 2!'
+router.get('/login', async (ctx) => {
+  const { username, password } = ctx.query
+  if (!username) {
+    throw createParameterError('param username is required')
+  }
+  if (!password) {
+    throw createParameterError('param password is required')
+  }
+  const token = generateToken({
+    username,
+    password
   })
+  ctx.body = {
+    success: true,
+    data: {
+      token
+    }
+  }
+})
+
+router.get('/user', async ctx => {
+  ctx.body = {
+    success: true,
+    data: ctx.state.user
+  }
 })
 
 router.get('/string', async (ctx, next) => {
