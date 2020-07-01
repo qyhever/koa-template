@@ -27,7 +27,7 @@ const verifyToken = jwtKoa({
 }).unless({
   // 数组中的路径不需要通过jwt验证
   path: [
-    /\/login/
+    /^\/login$/
   ]
 })
 

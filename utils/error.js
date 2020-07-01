@@ -83,9 +83,17 @@ class NotFoundError extends HttpError {
   }
 }
 
-exports.createHttpError = message => new HttpError(null, message)
-exports.createParameterError = message => new ParameterError(message)
-exports.createAuthorizationError = message => new AuthorizationError(message)
-exports.createForbiddenError = message => new ForbiddenError(message)
-exports.createNotFoundError = message => new NotFoundError(message)
-exports.ERROR = ERROR
+const createHttpError = message => new HttpError(null, message)
+const createParameterError = message => new ParameterError(message)
+const createAuthorizationError = message => new AuthorizationError(message)
+const createForbiddenError = message => new ForbiddenError(message)
+const createNotFoundError = message => new NotFoundError(message)
+
+module.exports = {
+  ERROR,
+  createHttpError,
+  createParameterError,
+  createAuthorizationError,
+  createForbiddenError,
+  createNotFoundError
+}
