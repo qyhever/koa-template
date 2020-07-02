@@ -11,7 +11,9 @@ const { createNotFoundError } = require('./utils/error')
 class InitManager {
   static initCore(app) {
     InitManager.app = app
-    // InitManager.loadConfig()
+    InitManager.loadConfig()
+    InitManager.loadHttpException()
+    require('./database/mysql')
     InitManager.mountMiddlewares()
     InitManager.initLoadRouters()
   }
